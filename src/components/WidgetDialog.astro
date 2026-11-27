@@ -1,0 +1,15 @@
+---
+// Full-screen widget overlay for mobile. The iframe only loads when opened.
+import type { Ctx } from '../lib/ctx';
+interface Props { x: Ctx }
+const { x } = Astro.props;
+---
+<dialog id="tr-book" aria-label={x.L.reserveTable} style={`padding:0;border:0;width:100%;max-width:100%;height:100%;max-height:100%;margin:0;background:${x.pal.ws}`}>
+  <div style="display:flex;flex-direction:column;height:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border-bottom:1px solid #e5e5e5;font:600 16px/1.2 system-ui,sans-serif;color:#171717">
+      <span>{x.L.reserveTable}</span>
+      <button type="button" data-close-book aria-label={x.L.close} style="width:40px;height:40px;border-radius:20px;border:0;background:#ececed;font-size:20px;line-height:1;cursor:pointer">×</button>
+    </div>
+    <iframe data-widget-dialog data-src={x.widgetSrc} title={x.L.reserveTable} style="flex:1;width:100%;border:0"></iframe>
+  </div>
+</dialog>

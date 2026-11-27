@@ -1,0 +1,39 @@
+# Pull requests: everything must pass before a change to the site or the engine is merged.
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Type check and unit tests
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: Verify output (translation gaps fail on PRs)
+        run: npm run verify -- --strict
+      - name: Build and verify every template with this site's data
+        run: npm run templates:check
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: Smoke tests (desktop + mobile)
+        run: npm run e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-traces
+          path: test-results/
+          retention-days: 7

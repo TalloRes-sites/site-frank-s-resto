@@ -1,0 +1,14 @@
+---
+import Privacy from '../../../components/Privacy.astro';
+import { buildCtx } from '../../../lib/ctx';
+import { loadSite } from '../../../lib/site-data';
+import type { Lang } from '../../../lib/types';
+
+export function getStaticPaths() {
+  return loadSite().content.languages.map((lang) => ({ params: { lang } }));
+}
+
+const { restaurant, content } = loadSite();
+const x = buildCtx(restaurant, content, Astro.params.lang as Lang);
+---
+<Privacy x={x} />

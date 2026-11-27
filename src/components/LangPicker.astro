@@ -1,0 +1,14 @@
+---
+// Mobile language picker, only with 2+ languages. Works without JavaScript (<details>).
+import type { Ctx } from '../lib/ctx';
+interface Props { x: Ctx; buttonStyle: string; menuBg: string; text: string }
+const { x, buttonStyle, menuBg, text } = Astro.props;
+---
+{x.langs.length > 1 && (
+  <details class="lang m-only" style="position:relative">
+    <summary aria-label={x.L.chooseLanguage} style={buttonStyle}>{x.lang.toUpperCase()}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+    <div class="lang-menu" style={`background:${menuBg};color:${text}`}>
+      {x.langs.map((l) => <a href={l.href} hreflang={l.code} lang={l.code} aria-current={l.current ? 'true' : undefined} style={`color:${text}`}>{l.code.toUpperCase()}</a>)}
+    </div>
+  </details>
+)}

@@ -1,0 +1,26 @@
+---
+// Full HTML document around a template body. Every template renders inside this.
+import { todayData, type Ctx } from '../lib/ctx';
+import { BASE_CSS, SITE_SCRIPT } from '../lib/page';
+import Head from './Head.astro';
+import WidgetDialog from './WidgetDialog.astro';
+
+interface Props { x: Ctx; css: string; today?: Date }
+const { x, css, today } = Astro.props;
+const td = todayData(x);
+// Template CSS is built from catalog palettes (trusted, not restaurant input).
+const style = `<style>${BASE_CSS}${css}</style>`;
+---
+<!doctype html>
+<html lang={x.lang}>
+  <head>
+    <Head x={x} today={today} />
+    <Fragment set:html={style} />
+  </head>
+  <body>
+    <slot />
+    <template id="tr-hours" data-hours={td.hours} data-closures={td.closures} data-labels={td.labels}></template>
+    <WidgetDialog x={x} />
+    <script is:inline set:html={SITE_SCRIPT} />
+  </body>
+</html>

@@ -1,0 +1,136 @@
+---
+// Template "Minimal" (fine dining). Ported 1:1 from the hand-off render/minimal.ts.
+// Visual reference: docs/designs/site-minimal-desktop.png
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import Document from '../../components/Document.astro';
+import Img from '../../components/Img.astro';
+import LangLinks from '../../components/LangLinks.astro';
+import LangPicker from '../../components/LangPicker.astro';
+import MapBox from '../../components/MapBox.astro';
+import MobileBar from '../../components/MobileBar.astro';
+import WidgetFrame from '../../components/WidgetFrame.astro';
+import type { Ctx } from '../../lib/ctx';
+
+interface Props { x: Ctx; today?: Date }
+const { x, today } = Astro.props;
+const c = x.pal; const L = x.L; const t = x.t;
+const css = `
+.mn-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) minmax(0,1fr)}
+.mn-name{text-align:center;font-size:${x.nameStep === 0 ? '30px' : '24px'};letter-spacing:${x.nameStep === 0 ? '.24em' : '.06em'}}
+.mn-hero{padding:40px 28px 0}.mn-heroimg{min-height:620px}.mn-gal{grid-template-columns:repeat(3,minmax(0,1fr))}.mn-off{margin-top:var(--off)}
+@container site (max-width:720px){.mn-head{grid-template-columns:minmax(0,1fr) auto}.mn-name{text-align:left;font-size:20px}.mn-hero{padding:24px 20px 56px}.mn-heroimg{min-height:380px}.mn-gal{grid-template-columns:1fr}.mn-off{margin-top:0}}
+.mn-h2{margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5cqi,64px);line-height:1}
+.mn-cap{margin:0;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500}`;
+const up = 'font-size:14px;letter-spacing:.06em;text-transform:uppercase';
+const navLink = `color:${c.text};text-decoration:none`;
+const cap = `margin:0 0 8px;color:${c.muted}`;
+const offs = ['0px', '80px', '24px'];
+---
+<Document x={x} css={css} today={today}>
+<div class="site" style={`background:${c.bg};color:${c.text};font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.7`}>
+  <header style={`position:sticky;top:0;z-index:5;background:${c.bg}`}>
+    <div class="mn-head" style="max-width:1240px;margin:0 auto;height:76px;padding:0 28px;align-items:center;gap:16px">
+      <nav class="d-only" aria-label={L.navInfo} style="display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase">
+        {x.hasAbout && <a href="#over" style={navLink}>{L.navAbout}</a>}{x.menus.length > 0 && <a href="#menu" style={navLink}>{L.navMenu}</a>}<a href="#info" style={navLink}>{L.navInfo}</a>
+      </nav>
+      <a href="#top" class="ell mn-name" style={`display:block;font-family:'Cormorant Garamond',serif;font-weight:500;text-transform:uppercase;color:${c.text};text-decoration:none`}>{x.name}</a>
+      <div style="justify-self:end;flex:0 0 auto;display:flex;align-items:center;gap:20px;font-size:13px;letter-spacing:.08em;text-transform:uppercase">
+        <LangLinks x={x} linkStyle={`color:${c.muted};text-decoration:none`} currentStyle={`color:${c.text}`} />
+        <a class="d-only" href="#reserveren" style={`height:42px;padding:0 20px;border:1px solid ${c.text};color:${c.text};display:flex;align-items:center;text-decoration:none`}>{L.reserve}</a>
+        <LangPicker x={x} buttonStyle={`height:38px;padding:0 10px 0 12px;border:1px solid ${c.line};color:${c.text};font-size:14px;font-weight:600`} menuBg={c.card} text={c.text} />
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="top" class="mn-hero" style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;align-items:stretch">
+      <div style="flex:1 1 380px;display:flex;flex-direction:column;justify-content:flex-end;gap:28px;padding-bottom:16px">
+        {t('overline') && <p class="mn-cap" style={`color:${c.muted}`}>{t('overline')}</p>}
+        {t('tagline')
+          ? <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:clamp(48px,7cqi,96px);line-height:.98">{t('tagline')}</h1>
+          : <h1 class="sr-only">{x.name}</h1>}
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="#reserveren" style={`height:52px;padding:0 28px;background:${c.accent};color:${c.on};display:flex;align-items:center;text-decoration:none;${up}`}>{L.reserveTable}</a>
+          {x.vouchersUrl && <a href={x.vouchersUrl} style={`height:52px;padding:0 28px;border:1px solid ${c.text};color:${c.text};display:flex;align-items:center;text-decoration:none;${up}`}>{L.buyVoucher}</a>}
+        </div>
+      </div>
+      {x.hero && <div class="ph mn-heroimg" style={`flex:1 1 420px;background:${c.surface}`}><Img x={x} photo={x.hero} eager /></div>}
+    </section>
+
+    {x.hasAbout && (
+      <section id="over" style="max-width:900px;margin:0 auto;padding:clamp(80px,11cqi,140px) 28px;text-align:center;display:flex;flex-direction:column;gap:28px;align-items:center">
+        {t('aboutLabel') && <p class="mn-cap" style={`color:${c.muted}`}>{t('aboutLabel')}</p>}
+        {t('aboutText') && <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4cqi,40px);line-height:1.3;white-space:pre-line">{t('aboutText')}</div>}
+        {x.about && <div class="ph" style={`width:min(100%,520px);aspect-ratio:4/3;background:${c.surface}`}><Img x={x} photo={x.about} sizes="(max-width: 720px) 100vw, 520px" /></div>}
+        {t('chef') && <p style={`margin:0;font-size:14px;color:${c.muted}`}>{t('chef')}</p>}
+      </section>
+    )}
+
+    {x.gallery.length > 0 && (
+      <section aria-label={L.navAbout} class="mn-gal" style="max-width:1240px;margin:0 auto;padding:0 28px clamp(80px,11cqi,140px);display:grid;gap:20px;align-items:start">
+        {x.gallery.map((p, i) => <div class="ph mn-off" style={`--off:${offs[i % 3]};aspect-ratio:3/4;background:${c.surface}`}><Img x={x} photo={p} sizes="(max-width: 720px) 100vw, 33vw" /></div>)}
+      </section>
+    )}
+
+    {x.menus.length > 0 && (
+      <section id="menu" style={`border-top:1px solid ${c.line}`}>
+        <div style="max-width:1040px;margin:0 auto;padding:clamp(72px,10cqi,120px) 28px;display:flex;flex-wrap:wrap;gap:48px">
+          <h2 class="mn-h2" style="flex:1 1 260px">{t('menuTitle')}</h2>
+          <div style="flex:2 1 420px;display:flex;flex-direction:column">
+            {x.menus.map((m) => (
+              <a href={m.url} style={`display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:22px 0;border-bottom:1px solid ${c.line};color:${c.text};text-decoration:none`}>
+                <span style="display:flex;flex-direction:column"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2">{m.name}</span><span style={`font-size:13px;color:${c.muted}`}>{m.note}</span></span>
+                <span style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">{L.pdf} →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section id="reserveren" style={`background:${c.surface}`}>
+      <div style="max-width:640px;margin:0 auto;padding:clamp(72px,10cqi,120px) 28px;display:flex;flex-direction:column;gap:20px;text-align:center">
+        <h2 class="mn-h2">{t('reserveTitle')}</h2>{x.groupLine && <p style={`margin:0;font-size:14px;color:${c.muted}`}>{x.groupLine}</p>}
+        <WidgetFrame x={x} frameStyle={`text-align:left;border:1px solid ${c.line};background:${c.card}`} />
+      </div>
+    </section>
+
+    <section id="info" style="max-width:1240px;margin:0 auto;padding:clamp(72px,10cqi,120px) 28px;display:flex;flex-wrap:wrap;gap:48px">
+      <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:10px">
+        <h3 class="mn-cap" style={cap}>{t('hoursTitle')}</h3>
+        {x.hours.map((h) => <div data-day={h.day} style="display:flex;justify-content:space-between;gap:16px;font-size:15px"><span>{h.label}</span><span style={`color:${h.closed ? c.muted : c.text}`}>{h.text}</span></div>)}
+        {x.closures && <p style={`margin:8px 0 0;font-size:14px;color:${c.muted}`}>{x.closures}</p>}
+      </div>
+      <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:10px">
+        <h3 class="mn-cap" style={cap}>{t('locationTitle')}</h3><address style="font-style:normal;font-size:15px">{x.addressLine}<br />{x.cityLine}</address>
+        <a href={x.routeHref} style={`font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:${c.text}`}>{L.route} →</a>
+        <MapBox x={x} boxStyle={`min-height:200px;border:1px solid ${c.line}`} buttonStyle={`height:40px;padding:0 16px;border:1px solid ${c.text};background:transparent;color:${c.text};font:inherit;font-size:13px;cursor:pointer`} noteColor={c.muted} />
+      </div>
+      <div id="contact" style="flex:1 1 280px;display:flex;flex-direction:column;gap:10px">
+        <h3 class="mn-cap" style={cap}>{t('contactTitle')}</h3>
+        <a href={x.telHref} style={`font-size:15px;color:${c.text}`}>{x.tel}</a><a href={`mailto:${x.email}`} style={`font-size:15px;color:${c.text}`}>{x.email}</a>
+        {x.socials.map((s) => <a href={s.href} rel="me" style={`font-size:15px;color:${c.text}`}>{s.label}</a>)}
+      </div>
+    </section>
+
+    {x.vouchersUrl && (
+      <section id="cadeau" style="max-width:1240px;margin:0 auto;padding:0 28px clamp(72px,10cqi,120px)">
+        <div style={`border:1px solid ${c.line};padding:36px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between`}>
+          <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3cqi,34px);line-height:1.2">{t('vouchersTitle')}</p>
+          <a href={x.vouchersUrl} style={`height:48px;padding:0 24px;background:${c.accent};color:${c.on};display:flex;align-items:center;text-decoration:none;${up}`}>{L.buyVoucher}</a>
+        </div>
+      </section>
+    )}
+  </main>
+  <footer style={`border-top:1px solid ${c.line}`}>
+    <div style={`max-width:1240px;margin:0 auto;padding:24px 28px;display:flex;flex-wrap:wrap;gap:8px 24px;font-size:13px;color:${c.muted}`}>
+      <span>{x.company}</span><a href="privacy/" style={`color:${c.muted}`}>{L.privacy}</a><span style="margin-left:auto">{L.madeBy}</span>
+    </div>
+  </footer>
+  <MobileBar x={x} barStyle={`padding:10px 16px;background:${c.bg};border-top:1px solid ${c.line}`} buttonStyle={`flex:1;height:50px;background:${c.accent};color:${c.on};display:flex;align-items:center;justify-content:center;text-decoration:none;${up}`} />
+</div>
+</Document>

@@ -1,0 +1,38 @@
+---
+// Privacy page per language (footer link "privacy/"). Uses the template palette and system fonts.
+import type { Ctx } from '../lib/ctx';
+import { privacyText } from '../lib/privacy';
+import { langPath, pageUrl } from '../lib/seo';
+
+interface Props { x: Ctx }
+const { x } = Astro.props;
+const c = x.pal;
+const p = privacyText(x.r, x.lang);
+const canonical = `${pageUrl(x.r, x.lang)}privacy/`;
+const alternates = x.c.languages.length > 1 ? x.c.languages.map((l) => ({ hreflang: l, href: `${pageUrl(x.r, l)}privacy/` })) : [];
+---
+<!doctype html>
+<html lang={x.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{p.title} · {x.name}</title>
+    <meta name="description" content={`${p.title} · ${x.name}`} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+  </head>
+  <body style={`margin:0;background:${c.bg};color:${c.text};font:17px/1.65 system-ui,-apple-system,'Segoe UI',sans-serif`}>
+    <main style="max-width:720px;margin:0 auto;padding:56px 24px 80px">
+      <p style="margin:0 0 32px"><a href={langPath(x.lang)} style={`color:${c.accentText}`}>← {p.back}</a></p>
+      <h1 style="margin:0 0 8px;font-size:clamp(32px,6vw,44px);line-height:1.15">{p.title}</h1>
+      <p style={`margin:0 0 40px;color:${c.muted}`}>{x.name}</p>
+      {p.sections.map((s) => (
+        <section style="margin:0 0 28px">
+          <h2 style="margin:0 0 8px;font-size:21px">{s.title}</h2>
+          {s.body.map((b) => <p style="margin:0 0 12px">{b}</p>)}
+        </section>
+      ))}
+      <p style={`margin:48px 0 0;font-size:14px;color:${c.muted}`}>{x.company}</p>
+    </main>
+  </body>
+</html>

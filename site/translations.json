@@ -1,0 +1,206 @@
+{
+  "fields": {
+    "overline": {
+      "en": {
+        "text": "Brasserie · Mechelen",
+        "source": "15f947af4f66"
+      },
+      "fr": {
+        "text": "Brasserie · Malines",
+        "source": "15f947af4f66"
+      }
+    },
+    "tagline": {
+      "en": {
+        "text": "Seasonal cooking in the heart of Mechelen",
+        "source": "0e65931216e9"
+      },
+      "fr": {
+        "text": "Cuisine de saison au cœur de Malines",
+        "source": "0e65931216e9"
+      }
+    },
+    "aboutTitle": {
+      "en": {
+        "text": "A brasserie as it should be",
+        "source": "568dff42ea07"
+      },
+      "fr": {
+        "text": "Une brasserie comme il se doit",
+        "source": "568dff42ea07"
+      }
+    },
+    "aboutText": {
+      "en": {
+        "text": "Since 2014 we have been cooking with whatever the season and the local farmers bring us. Honest Belgian classics, a good glass of wine and time to linger at the table.",
+        "source": "866cfd5a2b71"
+      },
+      "fr": {
+        "text": "Depuis 2014, nous cuisinons avec ce que la saison et les producteurs de la région nous apportent. Des classiques belges authentiques, un bon verre de vin et le temps de profiter de la table.",
+        "source": "866cfd5a2b71"
+      }
+    },
+    "chef": {
+      "en": {
+        "text": "Chef Jonas Maes",
+        "source": "db77180320d1"
+      },
+      "fr": {
+        "text": "Chef Jonas Maes",
+        "source": "db77180320d1"
+      }
+    }
+  },
+  "photos": {
+    "assets/hero.jpg": {
+      "en": {
+        "text": "Dining room with laid tables",
+        "source": "8dc0d0fb6639"
+      },
+      "fr": {
+        "text": "Salle avec tables dressées",
+        "source": "8dc0d0fb6639"
+      }
+    },
+    "assets/about.jpg": {
+      "en": {
+        "text": "Chef Jonas Maes in the kitchen",
+        "source": "c80d4d0cce68"
+      },
+      "fr": {
+        "text": "Le chef Jonas Maes en cuisine",
+        "source": "c80d4d0cce68"
+      }
+    },
+    "assets/gallery-1.jpg": {
+      "en": {
+        "text": "Dish",
+        "source": "11959f73e483"
+      },
+      "fr": {
+        "text": "Plat",
+        "source": "11959f73e483"
+      }
+    },
+    "assets/gallery-2.jpg": {
+      "en": {
+        "text": "Terrace",
+        "source": "18d42c880b1a"
+      },
+      "fr": {
+        "text": "Terrasse",
+        "source": "18d42c880b1a"
+      }
+    },
+    "assets/gallery-3.jpg": {
+      "en": {
+        "text": "Bar",
+        "source": "e496fd20136d"
+      },
+      "fr": {
+        "text": "Bar",
+        "source": "e496fd20136d"
+      }
+    },
+    "assets/gallery-4.jpg": {
+      "en": {
+        "text": "Wine",
+        "source": "1321660fb146"
+      },
+      "fr": {
+        "text": "Vin",
+        "source": "1321660fb146"
+      }
+    },
+    "assets/gallery-5.jpg": {
+      "en": {
+        "text": "Dessert",
+        "source": "40f9c1c945f7"
+      },
+      "fr": {
+        "text": "Dessert",
+        "source": "40f9c1c945f7"
+      }
+    },
+    "assets/gallery-6.jpg": {
+      "en": {
+        "text": "Dining room",
+        "source": "8a0a3c522eff"
+      },
+      "fr": {
+        "text": "Salle",
+        "source": "8a0a3c522eff"
+      }
+    }
+  },
+  "menus": {
+    "m1": {
+      "name": {
+        "en": {
+          "text": "À la carte",
+          "source": "1c8a8c325d1b"
+        },
+        "fr": {
+          "text": "À la carte",
+          "source": "1c8a8c325d1b"
+        }
+      }
+    },
+    "m2": {
+      "name": {
+        "en": {
+          "text": "Lunch menu",
+          "source": "5713935b50b8"
+        },
+        "fr": {
+          "text": "Menu du midi",
+          "source": "5713935b50b8"
+        }
+      },
+      "description": {
+        "en": {
+          "text": "Tuesday to Friday",
+          "source": "1c47b504d040"
+        },
+        "fr": {
+          "text": "Du mardi au vendredi",
+          "source": "1c47b504d040"
+        }
+      }
+    },
+    "m3": {
+      "name": {
+        "en": {
+          "text": "Wine list",
+          "source": "e0cd74165cac"
+        },
+        "fr": {
+          "text": "Carte des vins",
+          "source": "e0cd74165cac"
+        }
+      }
+    }
+  },
+  "seo": {
+    "title": {
+      "en": {
+        "text": "Brasserie Lindeboom · Brasserie in Mechelen",
+        "source": "019a041106fe"
+      },
+      "fr": {
+        "text": "Brasserie Lindeboom · Brasserie à Malines",
+        "source": "019a041106fe"
+      }
+    },
+    "description": {
+      "en": {
+        "text": "Seasonal cooking and Belgian classics in Mechelen. Book a table online.",
+        "source": "23f7ce8a3b14"
+      },
+      "fr": {
+        "text": "Cuisine de saison et classiques belges à Malines. Réservez une table en ligne.",
+        "source": "23f7ce8a3b14"
+      }
+    }
+  }
+}

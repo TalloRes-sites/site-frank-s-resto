@@ -1,0 +1,179 @@
+{
+  "template": "klassiek",
+  "palette": "Bordeaux",
+  "languages": [
+    "nl"
+  ],
+  "fields": {
+    "overline": {
+      "nl": "Brasserie · Mechelen"
+    },
+    "tagline": {
+      "nl": "Seizoenskeuken in het hart van Mechelen"
+    },
+    "aboutLabel": {
+      "nl": "Over ons",
+      "fr": "À propos",
+      "en": "About us"
+    },
+    "aboutTitle": {
+      "nl": "Een brasserie zoals het hoort"
+    },
+    "aboutText": {
+      "nl": "Sinds 2014 koken we met wat het seizoen en de boeren uit de streek ons brengen. Eerlijke Belgische klassiekers, een goed glas wijn en tijd om te tafelen."
+    },
+    "chef": {
+      "nl": "Chef Jonas Maes"
+    },
+    "menuLabel": {
+      "nl": "Eten en drinken",
+      "fr": "À table",
+      "en": "Food and drinks"
+    },
+    "menuTitle": {
+      "nl": "Menukaart",
+      "fr": "La carte",
+      "en": "Menu"
+    },
+    "reserveTitle": {
+      "nl": "Reserveer een tafel",
+      "fr": "Réservez une table",
+      "en": "Book a table"
+    },
+    "reserveIntro": {
+      "nl": "Kies je dag en uur, je krijgt meteen een bevestiging.",
+      "fr": "Choisissez le jour et l'heure, vous recevez tout de suite une confirmation.",
+      "en": "Pick a day and time, you get a confirmation straight away."
+    },
+    "vouchersTitle": {
+      "nl": "Geef een avond bij ons cadeau",
+      "fr": "Offrez une soirée chez nous",
+      "en": "Give an evening with us"
+    },
+    "vouchersText": {
+      "nl": "Cadeaubonnen, meteen in de mailbox.",
+      "fr": "Bons cadeaux, directement par e-mail.",
+      "en": "Gift vouchers, straight to the inbox."
+    },
+    "practicalTitle": {
+      "nl": "Praktisch",
+      "fr": "Infos pratiques",
+      "en": "Practical"
+    },
+    "hoursTitle": {
+      "nl": "Openingsuren",
+      "fr": "Heures d'ouverture",
+      "en": "Opening hours"
+    },
+    "locationTitle": {
+      "nl": "Adres en contact",
+      "fr": "Adresse et contact",
+      "en": "Address and contact"
+    },
+    "contactTitle": {
+      "nl": "Contact",
+      "fr": "Contact",
+      "en": "Contact"
+    }
+  },
+  "edited": [
+    "tagline",
+    "aboutTitle",
+    "aboutText",
+    "chef"
+  ],
+  "gallery": [
+    {
+      "url": "assets/gallery-1.jpg",
+      "alt": {
+        "nl": "Gerecht"
+      }
+    },
+    {
+      "url": "assets/gallery-2.jpg",
+      "alt": {
+        "nl": "Terras"
+      }
+    },
+    {
+      "url": "assets/gallery-3.jpg",
+      "alt": {
+        "nl": "Bar"
+      }
+    },
+    {
+      "url": "assets/gallery-4.jpg",
+      "alt": {
+        "nl": "Wijn"
+      }
+    },
+    {
+      "url": "assets/gallery-5.jpg",
+      "alt": {
+        "nl": "Dessert"
+      }
+    },
+    {
+      "url": "assets/gallery-6.jpg",
+      "alt": {
+        "nl": "Zaal"
+      }
+    }
+  ],
+  "galleryOn": true,
+  "vouchersOn": true,
+  "menus": [
+    {
+      "id": "m1",
+      "url": "assets/menu-m1.pdf",
+      "uploadedAt": "2026-11-12",
+      "name": {
+        "nl": "À la carte"
+      },
+      "description": {}
+    },
+    {
+      "id": "m2",
+      "url": "assets/menu-m2.pdf",
+      "uploadedAt": "2026-11-03",
+      "name": {
+        "nl": "Lunchmenu"
+      },
+      "description": {
+        "nl": "Dinsdag tot vrijdag"
+      }
+    },
+    {
+      "id": "m3",
+      "url": "assets/menu-m3.pdf",
+      "uploadedAt": "2026-10-20",
+      "name": {
+        "nl": "Wijnkaart"
+      },
+      "description": {}
+    }
+  ],
+  "socials": {
+    "instagram": "@brasserielindeboom"
+  },
+  "seo": {
+    "title": {
+      "nl": "Brasserie Lindeboom · Brasserie in Mechelen"
+    },
+    "description": {
+      "nl": "Seizoenskeuken en Belgische klassiekers in Mechelen. Reserveer online een tafel."
+    }
+  },
+  "heroPhoto": {
+    "url": "assets/hero.jpg",
+    "alt": {
+      "nl": "Zaal met gedekte tafels"
+    }
+  },
+  "aboutPhoto": {
+    "url": "assets/about.jpg",
+    "alt": {
+      "nl": "Chef Jonas Maes in de keuken"
+    }
+  }
+}

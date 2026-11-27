@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run check)",
+      "Bash(npm run test)",
+      "Bash(npm run build)",
+      "Bash(npm run verify:*)",
+      "Bash(npm run e2e:*)",
+      "Bash(npm run templates:check:*)",
+      "Bash(npm run translations:status:*)",
+      "Bash(npx astro check:*)",
+      "Bash(npx astro build:*)",
+      "Bash(npx vitest run:*)",
+      "Bash(npx playwright test:*)"
+    ],
+    "deny": [
+      "Edit(site/restaurant.json)",
+      "Edit(site/content.json)",
+      "Write(site/restaurant.json)",
+      "Write(site/content.json)"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+---
+// Sticky mobile "Book a table" bar; opens the full-screen widget dialog (WidgetDialog).
+import type { Ctx } from '../lib/ctx';
+interface Props { x: Ctx; barStyle: string; buttonStyle: string }
+const { x, barStyle, buttonStyle } = Astro.props;
+---
+<div class="m-only" style={`position:sticky;bottom:0;z-index:5;${barStyle}`}><a href="#reserveren" data-open-book style={buttonStyle}>{x.L.reserveTable}</a></div>

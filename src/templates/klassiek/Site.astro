@@ -1,0 +1,153 @@
+---
+// Template "Klassiek" (brasserie, bistro). Ported 1:1 from the hand-off render/klassiek.ts.
+// Visual reference: docs/designs/site-klassiek-desktop.png
+import '@fontsource/playfair-display/500.css';
+import '@fontsource/playfair-display/500-italic.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource/source-sans-3/400.css';
+import '@fontsource/source-sans-3/600.css';
+import Document from '../../components/Document.astro';
+import Img from '../../components/Img.astro';
+import LangLinks from '../../components/LangLinks.astro';
+import LangPicker from '../../components/LangPicker.astro';
+import MapBox from '../../components/MapBox.astro';
+import MobileBar from '../../components/MobileBar.astro';
+import WidgetFrame from '../../components/WidgetFrame.astro';
+import type { Ctx } from '../../lib/ctx';
+
+interface Props { x: Ctx; today?: Date }
+const { x, today } = Astro.props;
+const c = x.pal; const L = x.L; const t = x.t;
+const hero = c.hero ?? c.text;
+const css = `
+.k-name{font-family:'Playfair Display',serif;font-weight:500;line-height:1.04;overflow-wrap:break-word;margin:0}
+.k-nm0{font-size:clamp(44px,7.5cqi,92px)}.k-nm1{font-size:clamp(36px,5.6cqi,68px)}.k-nm2{font-size:clamp(30px,4.4cqi,52px)}
+.k-hero{min-height:640px}.k-gal{grid-template-columns:repeat(3,minmax(0,1fr))}.k-head{font-size:24px}
+@container site (max-width:720px){.k-hero{min-height:560px}.k-gal{grid-template-columns:repeat(2,minmax(0,1fr))}.k-head{font-size:19px}}
+.k-h2{margin:0;font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(34px,4.4cqi,52px);line-height:1.1}
+.k-over{margin:0;font-size:14px;letter-spacing:.18em;text-transform:uppercase}`;
+const btn = `height:52px;padding:0 28px;border-radius:2px;background:${c.accent};color:${c.on};font-weight:600;display:flex;align-items:center;text-decoration:none`;
+const section = 'max-width:1120px;margin:0 auto;padding:clamp(64px,9cqi,112px) 24px;';
+const h3 = `margin:0;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:${c.accentText}`;
+const navLink = `color:${c.text};text-decoration:none`;
+---
+<Document x={x} css={css} today={today}>
+<div class="site" style={`background:${c.bg};color:${c.text};font-family:'Source Sans 3',system-ui,sans-serif;font-size:17px;line-height:1.6`}>
+  <header style={`position:sticky;top:0;z-index:5;background:${c.bg};border-bottom:1px solid ${c.line}`}>
+    <div style="max-width:1180px;margin:0 auto;height:72px;padding:0 24px;display:flex;align-items:center;gap:32px">
+      <a href="#top" class="ell k-head" style={`font-family:'Playfair Display',serif;font-weight:700;color:${c.text};text-decoration:none;flex:0 1 auto`}>{x.name}</a>
+      <nav class="d-only" aria-label={L.navInfo} style="display:flex;gap:28px;font-size:15px;font-weight:600">
+        {x.hasAbout && <a href="#over" style={navLink}>{L.navAbout}</a>}
+        {x.menus.length > 0 && <a href="#menu" style={navLink}>{L.navMenu}</a>}
+        <a href="#info" style={navLink}>{L.navInfo}</a><a href="#contact" style={navLink}>{L.navContact}</a>
+      </nav>
+      <div style="margin-left:auto;flex:0 0 auto;display:flex;align-items:center;gap:16px">
+        <LangLinks x={x} linkStyle={`font-size:14px;font-weight:600;color:${c.muted};text-decoration:none`} currentStyle={`font-size:14px;font-weight:600;color:${c.text};text-decoration:underline`} />
+        <a class="d-only" href="#reserveren" style={`height:44px;padding:0 22px;border-radius:2px;background:${c.accent};color:${c.on};font-weight:600;font-size:15px;display:flex;align-items:center;text-decoration:none;white-space:nowrap`}>{L.reserve}</a>
+        <LangPicker x={x} buttonStyle={`height:38px;padding:0 10px 0 12px;border:1px solid ${c.line};border-radius:2px;color:${c.text};font-size:14px;font-weight:600`} menuBg={c.card} text={c.text} />
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="top" class="k-hero ph" style={`position:relative;background:${hero};color:#f7f1e8;display:flex;align-items:center;justify-content:center;text-align:center`}>
+      {x.hero
+        ? <><Img x={x} photo={x.hero} eager sizes="100vw" /><div aria-hidden="true" style="position:absolute;inset:0;background:rgba(0,0,0,.45)"></div></>
+        : <div aria-hidden="true" style="position:absolute;inset:20px;border:1px solid rgba(255,255,255,.22)"></div>}
+      <div style="position:relative;max-width:760px;padding:64px 24px;display:flex;flex-direction:column;align-items:center;gap:20px">
+        {t('overline') && <p class="k-over" style="color:#e9e1d6">{t('overline')}</p>}
+        <h1 class={`k-name k-nm${x.nameStep}`}>{x.name}</h1>
+        {t('tagline') && <p style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(19px,2.2cqi,26px);color:#efe7dc">{t('tagline')}</p>}
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:12px">
+          <a href="#reserveren" style={btn}>{L.reserveTable}</a>
+          {x.vouchersUrl && <a href={x.vouchersUrl} style="height:52px;padding:0 28px;border-radius:2px;border:1px solid #f7f1e8;color:#f7f1e8;font-weight:600;display:flex;align-items:center;text-decoration:none">{L.buyVoucher}</a>}
+        </div>
+      </div>
+    </section>
+
+    <div style={`border-bottom:1px solid ${c.line}`}>
+      <div style="max-width:1120px;margin:0 auto;padding:20px 24px;display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:center;font-size:15px">
+        <span data-today-wrap hidden data-today-text style="font-weight:600"></span><span>{x.addressLine}, {x.r.address.city}</span><a href={x.telHref} style={`color:${c.text}`}>{x.tel}</a>
+      </div>
+    </div>
+
+    {x.hasAbout && (
+      <section id="over" style={`${section}display:flex;flex-wrap:wrap;gap:56px;align-items:center;justify-content:center`}>
+        {x.about && <div class="ph" style={`flex:1 1 340px;aspect-ratio:4/5;max-height:560px;background:${c.surface}`}><Img x={x} photo={x.about} /></div>}
+        <div style={`flex:1 1 380px;max-width:${x.about ? 'none' : '720px'};display:flex;flex-direction:column;gap:18px`}>
+          {t('aboutLabel') && <p class="k-over" style={`color:${c.accentText}`}>{t('aboutLabel')}</p>}
+          {t('aboutTitle') && <h2 class="k-h2">{t('aboutTitle')}</h2>}
+          {t('aboutText') && <div style={`color:${c.muted};white-space:pre-line`}>{t('aboutText')}</div>}
+          {t('chef') && <p style="margin:8px 0 0;font-family:'Playfair Display',serif;font-style:italic;font-size:22px">{t('chef')}</p>}
+        </div>
+      </section>
+    )}
+
+    {x.gallery.length > 0 && (
+      <section aria-label={L.navAbout} class="k-gal" style="max-width:1180px;margin:0 auto;padding:0 24px clamp(64px,9cqi,112px);display:grid;gap:12px">
+        {x.gallery.map((p) => <div class="ph" style={`aspect-ratio:1;background:${c.surface}`}><Img x={x} photo={p} sizes="(max-width: 720px) 50vw, 33vw" /></div>)}
+      </section>
+    )}
+
+    {x.menus.length > 0 && (
+      <section id="menu" style={`background:${c.surface}`}>
+        <div style="max-width:1120px;margin:0 auto;padding:clamp(64px,9cqi,104px) 24px;display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center">
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:center">{t('menuLabel') && <p class="k-over" style={`color:${c.accentText}`}>{t('menuLabel')}</p>}<h2 class="k-h2">{t('menuTitle')}</h2></div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;width:100%">
+            {x.menus.map((m) => (
+              <a href={m.url} style={`flex:1 1 240px;max-width:340px;background:${c.card};border:1px solid ${c.line};padding:28px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;color:${c.text};text-decoration:none`}>
+                <span style="font-family:'Playfair Display',serif;font-size:26px">{m.name}</span><span style={`font-size:14px;color:${c.muted}`}>{m.note}</span><span style={`margin-top:8px;font-size:15px;font-weight:600;color:${c.accentText};text-decoration:underline`}>{L.viewMenu}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section id="reserveren" style={`${section}display:flex;flex-wrap:wrap;gap:48px;align-items:center`}>
+      <div style="flex:1 1 340px;display:flex;flex-direction:column;gap:16px">
+        <h2 class="k-h2">{t('reserveTitle')}</h2>{t('reserveIntro') && <p style={`margin:0;color:${c.muted}`}>{t('reserveIntro')}</p>}
+        {x.groupLine && <p style={`margin:0;font-size:15px;color:${c.muted}`}>{x.groupLine}</p>}
+      </div>
+      <WidgetFrame x={x} frameStyle={`flex:1 1 360px;max-width:520px;border:1px solid ${c.line};padding:8px;background:${c.card}`} />
+    </section>
+
+    {x.vouchersUrl && (
+      <section id="cadeaubon" style={`background:${c.accent};color:${c.on}`}>
+        <div style="max-width:1120px;margin:0 auto;padding:56px 24px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between">
+          <div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,3.4cqi,40px);line-height:1.15">{t('vouchersTitle')}</h2>{t('vouchersText') && <p style="margin:0;opacity:.9">{t('vouchersText')}</p>}</div>
+          <a href={x.vouchersUrl} style={`height:52px;padding:0 28px;border:1px solid ${c.on};color:${c.on};font-weight:600;display:flex;align-items:center;text-decoration:none`}>{L.buyVoucher}</a>
+        </div>
+      </section>
+    )}
+
+    <section id="info" style={`${section}display:flex;flex-direction:column;gap:40px`}>
+      <h2 class="k-h2">{t('practicalTitle')}</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:40px">
+        <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:12px">
+          <h3 style={h3}>{t('hoursTitle')}</h3>
+          {x.hours.map((h) => <div data-day={h.day} style={`display:flex;justify-content:space-between;gap:16px;font-size:16px;padding-bottom:8px;border-bottom:1px solid ${c.line}`}><span>{h.label}</span><span style={`text-align:right;color:${h.closed ? c.muted : c.text}`}>{h.text}</span></div>)}
+          {x.closures && <p style={`margin:4px 0 0;font-size:15px;background:${c.surface};padding:10px 12px`}>{x.closures}</p>}
+        </div>
+        <div id="contact" style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px">
+          <h3 style={h3}>{t('locationTitle')}</h3>
+          <address style="font-style:normal;display:flex;flex-direction:column;gap:14px">
+            <p style="margin:0">{x.addressLine}<br />{x.cityLine}</p>
+            <p style="margin:0"><a href={x.telHref} style={`color:${c.text}`}>{x.tel}</a><br /><a href={`mailto:${x.email}`} style={`color:${c.text}`}>{x.email}</a></p>
+          </address>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href={x.routeHref} style={`height:44px;padding:0 18px;border:1px solid ${c.text};color:${c.text};font-weight:600;font-size:15px;display:flex;align-items:center;text-decoration:none`}>{L.route}</a>
+            {x.socials.map((s) => <a href={s.href} rel="me" style={`height:44px;padding:0 18px;border:1px solid ${c.line};color:${c.text};font-weight:600;font-size:15px;display:flex;align-items:center;text-decoration:none`}>{s.label}</a>)}
+          </div>
+        </div>
+        <MapBox x={x} boxStyle={`flex:1 1 300px;min-height:260px;background:${c.surface}`} buttonStyle={`height:40px;padding:0 16px;border:1px solid ${c.text};background:transparent;color:${c.text};font:inherit;font-size:14px;font-weight:600;cursor:pointer`} noteColor={c.muted} />
+      </div>
+    </section>
+  </main>
+  <footer style={`border-top:1px solid ${c.line}`}>
+    <div style={`max-width:1120px;margin:0 auto;padding:28px 24px;display:flex;flex-wrap:wrap;gap:8px 24px;font-size:14px;color:${c.muted}`}>
+      <span>{x.company}</span><a href="privacy/" style={`color:${c.muted}`}>{L.privacy}</a><span style="margin-left:auto">{L.madeBy}</span>
+    </div>
+  </footer>
+  <MobileBar x={x} barStyle={`padding:10px 16px;background:${c.bg};border-top:1px solid ${c.line}`} buttonStyle={`flex:1;height:50px;background:${c.accent};color:${c.on};font-weight:600;display:flex;align-items:center;justify-content:center;text-decoration:none`} />
+</div>
+</Document>

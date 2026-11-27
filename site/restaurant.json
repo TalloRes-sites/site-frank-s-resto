@@ -1,0 +1,107 @@
+{
+  "name": "Brasserie Lindeboom",
+  "cuisine": "Brasserie",
+  "address": {
+    "street": "Ijzerenleen 21",
+    "postalCode": "2800",
+    "city": "Mechelen",
+    "country": "BE"
+  },
+  "geo": {
+    "lat": 51.0259,
+    "lng": 4.4776
+  },
+  "phone": "015 00 00 00",
+  "email": "hallo@brasserielindeboom.be",
+  "hours": [
+    {
+      "day": 1,
+      "ranges": [
+        [
+          "12:00",
+          "14:00"
+        ],
+        [
+          "18:00",
+          "22:00"
+        ]
+      ]
+    },
+    {
+      "day": 2,
+      "ranges": [
+        [
+          "12:00",
+          "14:00"
+        ],
+        [
+          "18:00",
+          "22:00"
+        ]
+      ]
+    },
+    {
+      "day": 3,
+      "ranges": [
+        [
+          "12:00",
+          "14:00"
+        ],
+        [
+          "18:00",
+          "22:00"
+        ]
+      ]
+    },
+    {
+      "day": 4,
+      "ranges": [
+        [
+          "12:00",
+          "14:00"
+        ],
+        [
+          "18:00",
+          "22:00"
+        ]
+      ]
+    },
+    {
+      "day": 5,
+      "ranges": [
+        [
+          "18:00",
+          "22:30"
+        ]
+      ]
+    },
+    {
+      "day": 6,
+      "ranges": [
+        [
+          "12:00",
+          "15:00"
+        ]
+      ]
+    }
+  ],
+  "closures": [
+    {
+      "date": "2026-12-24"
+    },
+    {
+      "date": "2026-12-25"
+    }
+  ],
+  "company": {
+    "name": "Brasserie Lindeboom BV",
+    "enterpriseNumber": "BE 0123.456.789"
+  },
+  "widgetFormId": "mjrbnz296awyjw",
+  "vouchers": {
+    "enabled": true,
+    "url": "https://vouchers.tallores.com/lindeboom"
+  },
+  "maxOnlinePartySize": 10,
+  "siteUrl": "https://lindeboom.tallores.site"
+}

@@ -1,0 +1,12 @@
+// Cloudflare Worker that serves the built site as static assets (no Worker script).
+// `name` is overridden in CI with `--name ${{ vars.CF_WORKER_NAME }}`, one Worker per restaurant.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "restosite-demo",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "force-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

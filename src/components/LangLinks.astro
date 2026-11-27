@@ -1,0 +1,13 @@
+---
+// Desktop language links, only with 2+ languages. Styles come from the template.
+import type { Ctx } from '../lib/ctx';
+interface Props { x: Ctx; linkStyle: string; currentStyle: string }
+const { x, linkStyle, currentStyle } = Astro.props;
+---
+{x.langs.length > 1 && (
+  <nav class="d-only" aria-label={x.L.chooseLanguage} style="display:flex;gap:10px">
+    {x.langs.map((l) => l.current
+      ? <span aria-current="true" style={currentStyle}>{l.code.toUpperCase()}</span>
+      : <a href={l.href} hreflang={l.code} lang={l.code} style={linkStyle}>{l.code.toUpperCase()}</a>)}
+  </nav>
+)}

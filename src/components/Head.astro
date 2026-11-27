@@ -1,0 +1,27 @@
+---
+// <head> content for a language page: title, description, canonical, hreflang, Open Graph, JSON-LD.
+// SEO/GEO logic lives in src/lib/seo.ts; this component only renders it.
+import type { Ctx } from '../lib/ctx';
+import { hreflangLinks, pageMeta, restaurantJsonLd } from '../lib/seo';
+
+interface Props { x: Ctx; today?: Date }
+const { x, today } = Astro.props;
+const meta = pageMeta(x.r, x.c, x.lang);
+const alternates = hreflangLinks(x.r, x.c);
+// JSON in a <script> must not contain "</script>"; escaping "<" covers it.
+const ld = JSON.stringify(restaurantJsonLd(x.r, x.c, x.lang, today)).replace(/</g, '\\u003c');
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{meta.title}</title>
+<meta name="description" content={meta.description} />
+<link rel="canonical" href={meta.canonical} />
+{alternates.map((h) => <link rel="alternate" hreflang={h.hreflang} href={h.href} />)}
+<meta property="og:type" content="restaurant.restaurant" />
+<meta property="og:title" content={meta.title} />
+<meta property="og:description" content={meta.description} />
+<meta property="og:url" content={meta.canonical} />
+<meta property="og:locale" content={x.lang} />
+{meta.ogImage && <meta property="og:image" content={meta.ogImage} />}
+<meta name="twitter:card" content={meta.ogImage ? 'summary_large_image' : 'summary'} />
+<script type="application/ld+json" is:inline set:html={ld} />

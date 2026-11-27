@@ -1,0 +1,70 @@
+# Builds the static site and deploys it to this restaurant's Cloudflare Worker.
+#
+# Triggers:
+#   push to main           TalloRes commits new data/content/assets to site/, or a merged code change
+#   repository_dispatch    TalloRes signals a data change (hours, closures, ...) without a commit:
+#                          POST /repos/{owner}/{repo}/dispatches {"event_type":"tallores-data-changed"}
+#   schedule (nightly)     past closures drop off the page and the JSON-LD
+#   workflow_dispatch      manual
+#
+# Repo/org settings (see docs/new-site.md):
+#   secrets.CLOUDFLARE_API_TOKEN, secrets.CLOUDFLARE_ACCOUNT_ID
+#   vars.CF_WORKER_NAME    one Worker per restaurant. Empty = build only (as in the template repo itself).
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [tallores-data-changed]
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Type check and unit tests
+        run: npm run check
+      - name: Build
+        run: npm run build
+      # Not strict: a TalloRes data push must never be blocked by a missing translation.
+      # Gaps fall back to the main language and are listed in the job summary.
+      - name: Verify output
+        run: |
+          set +e
+          npm run verify > verify.log 2>&1
+          status=$?
+          cat verify.log
+          {
+            echo '### Site verification'
+            echo '```'
+            cat verify.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - name: Deploy to Cloudflare
+        if: vars.CF_WORKER_NAME != ''
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --name ${{ vars.CF_WORKER_NAME }}
+      - name: No Worker configured
+        if: vars.CF_WORKER_NAME == ''
+        run: echo "::notice::vars.CF_WORKER_NAME is not set; built and verified, not deployed."

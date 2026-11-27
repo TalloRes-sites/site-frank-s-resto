@@ -1,0 +1,24 @@
+---
+import { buildCtx } from '../lib/ctx';
+import { langPath } from '../lib/seo';
+import { loadSite } from '../lib/site-data';
+
+const { restaurant, content } = loadSite();
+const x = buildCtx(restaurant, content, content.languages[0]);
+const c = x.pal;
+---
+<!doctype html>
+<html lang={x.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>404 · {x.name}</title>
+  </head>
+  <body style={`margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:${c.bg};color:${c.text};font:17px/1.6 system-ui,sans-serif`}>
+    <main style="text-align:center;padding:24px">
+      <h1 style="margin:0 0 12px;font-size:48px">404</h1>
+      <p style="margin:0 0 24px"><a href={langPath(x.lang)} style={`color:${c.accentText}`}>{x.name}</a></p>
+    </main>
+  </body>
+</html>

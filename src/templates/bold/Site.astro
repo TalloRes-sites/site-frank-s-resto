@@ -1,0 +1,132 @@
+---
+// Template "Bold" (burgers, street food). Ported 1:1 from the hand-off render/bold.ts.
+// Visual reference: docs/designs/site-bold-desktop.png
+import '@fontsource/anton/400.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/700.css';
+import Document from '../../components/Document.astro';
+import Img from '../../components/Img.astro';
+import LangLinks from '../../components/LangLinks.astro';
+import LangPicker from '../../components/LangPicker.astro';
+import MapBox from '../../components/MapBox.astro';
+import MobileBar from '../../components/MobileBar.astro';
+import WidgetFrame from '../../components/WidgetFrame.astro';
+import type { Ctx } from '../../lib/ctx';
+
+interface Props { x: Ctx; today?: Date }
+const { x, today } = Astro.props;
+const c = x.pal; const L = x.L; const t = x.t;
+const ink = c.text; const band = c.band ?? c.text; const bandFg = c.bandFg ?? c.bg;
+const STAR = 'M12 0l2.6 8.4L23 6l-5.6 6L23 18l-8.4-2.4L12 24l-2.6-8.4L1 18l5.6-6L1 6l8.4 2.4z';
+const css = `
+.b-anton{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase}
+.b-nm0{font-size:clamp(72px,13cqi,168px)}.b-nm1{font-size:clamp(52px,9cqi,116px)}.b-nm2{font-size:clamp(40px,6.4cqi,84px)}
+.b-hero{padding:56px 20px 72px}.b-gal{grid-template-columns:repeat(4,minmax(0,1fr))}.b-head{font-size:30px}
+@container site (max-width:720px){.b-hero{padding:32px 20px 48px}.b-gal{grid-template-columns:repeat(2,minmax(0,1fr))}.b-head{font-size:22px}}
+.b-h2{margin:0;font-size:clamp(48px,7cqi,88px);line-height:.95}
+.b-card{border:3px solid ${ink};border-radius:20px;background:${c.card};padding:24px}`;
+const pill = (bg: string, fg: string, h = 56) => `height:${h}px;padding:0 28px;border-radius:${h / 2}px;border:3px solid ${ink};background:${bg};color:${fg};font-weight:700;display:flex;align-items:center;text-decoration:none;box-shadow:4px 4px 0 ${ink};box-sizing:border-box`;
+const navLink = `color:${ink};text-decoration:none`;
+const rot = ['-1.5deg', '1deg', '-0.5deg', '1.5deg'];
+---
+<Document x={x} css={css} today={today}>
+<div class="site" style={`background:${c.bg};color:${ink};font-family:'DM Sans',system-ui,sans-serif;font-size:17px;line-height:1.55`}>
+  <header style={`position:sticky;top:0;z-index:5;background:${c.bg};border-bottom:3px solid ${ink}`}>
+    <div style="max-width:1220px;margin:0 auto;height:74px;padding:0 20px;display:flex;align-items:center;gap:28px">
+      <a href="#top" class="ell b-anton b-head" style={`color:${ink};text-decoration:none;flex:0 1 auto`}>{x.name}</a>
+      <nav class="d-only" aria-label={L.navInfo} style="display:flex;gap:24px;font-weight:700;font-size:15px">
+        {x.menus.length > 0 && <a href="#menu" style={navLink}>{L.navMenu}</a>}{x.hasAbout && <a href="#over" style={navLink}>{L.navAbout}</a>}<a href="#info" style={navLink}>{L.navInfo}</a>
+      </nav>
+      <div style="margin-left:auto;flex:0 0 auto;display:flex;align-items:center;gap:14px">
+        <LangLinks x={x} linkStyle={`font-weight:700;font-size:14px;color:${c.muted};text-decoration:none`} currentStyle={`font-weight:700;font-size:14px;color:${ink}`} />
+        <a class="d-only" href="#reserveren" style={`height:46px;padding:0 20px;border-radius:23px;border:3px solid ${ink};background:${c.accent};color:${c.on};font-weight:700;font-size:15px;display:flex;align-items:center;text-decoration:none;box-sizing:border-box`}>{L.reserve}</a>
+        <LangPicker x={x} buttonStyle={`height:38px;padding:0 10px 0 12px;border:2px solid ${ink};border-radius:19px;color:${ink};font-size:14px;font-weight:700`} menuBg={c.card} text={ink} />
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="top" class="b-hero" style="max-width:1220px;margin:0 auto;display:flex;flex-wrap:wrap;gap:36px;align-items:center">
+      <div style="flex:1 1 460px;display:flex;flex-direction:column;gap:22px">
+        {t('overline') && <p style={`margin:0;align-self:flex-start;padding:6px 14px;border:2px solid ${ink};border-radius:18px;background:${c.card};font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em`}>{t('overline')}</p>}
+        <h1 class={`b-anton b-nm${x.nameStep}`} style="margin:0;line-height:.92;overflow-wrap:break-word">{x.name}</h1>
+        {t('tagline') && <p style="margin:0;font-size:clamp(19px,2cqi,23px);font-weight:500;max-width:520px">{t('tagline')}</p>}
+        <div style="display:flex;flex-wrap:wrap;gap:12px"><a href="#reserveren" style={pill(c.accent, c.on)}>{L.reserveTable}</a>{x.vouchersUrl && <a href={x.vouchersUrl} style={pill(c.card, ink)}>{L.buyVoucher}</a>}</div>
+      </div>
+      {x.hero
+        ? <div class="ph" style={`flex:1 1 380px;aspect-ratio:1;max-height:520px;border:3px solid ${ink};border-radius:24px;box-shadow:8px 8px 0 ${ink};background:${c.surface}`}><Img x={x} photo={x.hero} eager /></div>
+        : <div aria-hidden="true" style={`flex:1 1 380px;aspect-ratio:1;max-height:520px;border:3px solid ${ink};border-radius:24px;box-shadow:8px 8px 0 ${ink};background:${c.accent};color:${c.on};display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden`}><svg viewBox="0 0 24 24" fill="currentColor" style="position:absolute;width:78%;height:78%;opacity:.16"><path d={STAR} /></svg><span class="b-anton" style="position:relative;font-size:clamp(140px,24cqi,300px);line-height:1">{x.initial}</span></div>}
+    </section>
+
+    <div aria-hidden="true" style={`background:${band};color:${bandFg};border-top:3px solid ${ink};border-bottom:3px solid ${ink};overflow:hidden;white-space:nowrap;display:flex;align-items:center;gap:28px;padding:14px 0`}>
+      {Array.from({ length: 8 }, () => <><span class="b-anton" style="font-size:30px;line-height:1;flex:0 0 auto">{x.name}</span><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" style="flex:0 0 26px"><path d={STAR} /></svg></>)}
+    </div>
+
+    {x.menus.length > 0 && (
+      <section id="menu" style="max-width:1220px;margin:0 auto;padding:clamp(64px,9cqi,104px) 20px;display:flex;flex-direction:column;gap:32px">
+        <h2 class="b-anton b-h2">{t('menuTitle')}</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:20px">
+          {x.menus.map((m, i) => (
+            <a href={m.url} style={`flex:1 1 260px;border:3px solid ${ink};border-radius:20px;background:${i % 2 ? c.surface : c.card};color:${ink};box-shadow:5px 5px 0 ${ink};padding:26px;display:flex;flex-direction:column;gap:10px;text-decoration:none;min-height:180px`}>
+              <span class="b-anton" style="font-size:40px;line-height:1;overflow-wrap:break-word">{m.name}</span><span style="font-size:15px;font-weight:500">{m.note}</span><span style="margin-top:auto;font-weight:700">{L.pdf} ↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {x.gallery.length > 0 && (
+      <section aria-label={L.navAbout} class="b-gal" style="max-width:1220px;margin:0 auto;padding:0 20px clamp(64px,9cqi,104px);display:grid;gap:16px">
+        {x.gallery.map((p, i) => <div class="ph" style={`aspect-ratio:1;border:3px solid ${ink};border-radius:18px;transform:rotate(${rot[i % 4]});background:${c.surface}`}><Img x={x} photo={p} sizes="(max-width: 720px) 50vw, 25vw" /></div>)}
+      </section>
+    )}
+
+    {x.hasAbout && (
+      <section id="over" style={`background:${c.surface};border-top:3px solid ${ink};border-bottom:3px solid ${ink}`}>
+        <div style="max-width:1220px;margin:0 auto;padding:clamp(64px,9cqi,104px) 20px;display:flex;flex-wrap:wrap;gap:40px;align-items:center">
+          {t('aboutTitle') && <h2 class="b-anton" style="flex:1 1 360px;margin:0;font-size:clamp(44px,6cqi,76px);line-height:.95">{t('aboutTitle')}</h2>}
+          {x.about && <div class="ph" style={`flex:0 1 320px;aspect-ratio:1;border:3px solid ${ink};border-radius:20px;background:${c.card}`}><Img x={x} photo={x.about} sizes="(max-width: 720px) 100vw, 320px" /></div>}
+          <div style="flex:1 1 400px;display:flex;flex-direction:column;gap:14px">{t('aboutText') && <div style="font-size:19px;white-space:pre-line">{t('aboutText')}</div>}{t('chef') && <p style="margin:0;font-weight:700">{t('chef')}</p>}</div>
+        </div>
+      </section>
+    )}
+
+    <section id="reserveren" style="max-width:1220px;margin:0 auto;padding:clamp(64px,9cqi,104px) 20px;display:flex;flex-wrap:wrap;gap:40px;align-items:center">
+      <div style="flex:1 1 340px;display:flex;flex-direction:column;gap:14px"><h2 class="b-anton b-h2">{t('reserveTitle')}</h2>{t('reserveIntro') && <p style="margin:0;font-size:19px">{t('reserveIntro')}</p>}{x.groupLine && <p style={`margin:0;font-size:16px;color:${c.muted}`}>{x.groupLine}</p>}</div>
+      <WidgetFrame x={x} frameStyle={`flex:1 1 380px;max-width:520px;border:3px solid ${ink};border-radius:22px;box-shadow:8px 8px 0 ${ink};overflow:hidden;background:${c.card}`} />
+    </section>
+
+    <section id="info" style="max-width:1220px;margin:0 auto;padding:0 20px clamp(64px,9cqi,104px);display:flex;flex-wrap:wrap;gap:20px">
+      <div class="b-card" style="flex:1 1 300px;display:flex;flex-direction:column;gap:8px">
+        <h3 class="b-anton" style="margin:0 0 6px;font-size:30px">{t('hoursTitle')}</h3>
+        {x.hours.map((h) => <div data-day={h.day} style="display:flex;justify-content:space-between;gap:12px;font-size:16px"><span>{h.label}</span><span style={`color:${h.closed ? c.muted : ink}`}>{h.text}</span></div>)}
+        {x.closures && <p style="margin:8px 0 0;font-size:14px;font-weight:700">{x.closures}</p>}
+      </div>
+      <div class="b-card" style="flex:1 1 300px;display:flex;flex-direction:column;gap:10px">
+        <h3 class="b-anton" style="margin:0 0 6px;font-size:30px">{t('locationTitle')}</h3><address style="font-style:normal;font-size:16px">{x.addressLine}<br />{x.cityLine}</address>
+        <a href={x.routeHref} style={`align-self:flex-start;height:44px;padding:0 18px;border-radius:22px;border:2px solid ${ink};color:${ink};font-weight:700;display:flex;align-items:center;text-decoration:none`}>{L.route}</a>
+        <MapBox x={x} boxStyle={`min-height:200px;border:2px solid ${ink};border-radius:14px`} buttonStyle={`height:40px;padding:0 16px;border-radius:20px;border:2px solid ${ink};background:${c.card};color:${ink};font:inherit;font-size:14px;font-weight:700;cursor:pointer`} noteColor={c.muted} />
+      </div>
+      <div id="contact" class="b-card" style="flex:1 1 300px;display:flex;flex-direction:column;gap:10px">
+        <h3 class="b-anton" style="margin:0 0 6px;font-size:30px">{t('contactTitle')}</h3>
+        <a href={x.telHref} style={`font-size:16px;color:${ink}`}>{x.tel}</a><a href={`mailto:${x.email}`} style={`font-size:16px;color:${ink}`}>{x.email}</a>
+        {x.socials.map((s) => <a href={s.href} rel="me" style={`font-size:16px;font-weight:700;color:${ink}`}>{s.label}</a>)}
+      </div>
+    </section>
+
+    {x.vouchersUrl && (
+      <section id="cadeau" style="max-width:1220px;margin:0 auto;padding:0 20px clamp(64px,9cqi,104px)">
+        <div style={`border:3px solid ${ink};border-radius:24px;background:${c.accent};color:${c.on};padding:32px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between`}>
+          <p class="b-anton" style="margin:0;font-size:clamp(32px,4cqi,48px);line-height:1">{t('vouchersTitle')}</p><a href={x.vouchersUrl} style={`${pill(c.card, ink, 54)};box-shadow:none`}>{L.buyVoucher}</a>
+        </div>
+      </section>
+    )}
+  </main>
+  <footer style={`background:${band};color:${bandFg}`}>
+    <div style="max-width:1220px;margin:0 auto;padding:24px 20px;display:flex;flex-wrap:wrap;gap:8px 24px;font-size:14px">
+      <span>{x.company}</span><a href="privacy/" style={`color:${bandFg}`}>{L.privacy}</a><span style="margin-left:auto">{L.madeBy}</span>
+    </div>
+  </footer>
+  <MobileBar x={x} barStyle={`padding:10px 16px;background:${c.bg};border-top:3px solid ${ink}`} buttonStyle={`flex:1;height:52px;border-radius:26px;border:3px solid ${ink};background:${c.accent};color:${c.on};font-weight:700;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box`} />
+</div>
+</Document>
