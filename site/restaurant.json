@@ -1,29 +1,24 @@
 {
-  "name": "Brasserie Lindeboom",
-  "cuisine": "Brasserie",
+  "name": "Frank's Resto",
   "address": {
-    "street": "Ijzerenleen 21",
-    "postalCode": "2800",
-    "city": "Mechelen",
+    "street": "Hoekstraat, 49",
+    "postalCode": "2470",
+    "city": "Retie",
     "country": "BE"
   },
-  "geo": {
-    "lat": 51.0259,
-    "lng": 4.4776
-  },
-  "phone": "015 00 00 00",
-  "email": "hallo@brasserielindeboom.be",
+  "phone": "32460232836",
+  "email": "info@fvdlconsulting.be",
   "hours": [
     {
       "day": 1,
       "ranges": [
         [
           "12:00",
-          "14:00"
+          "15:00"
         ],
         [
-          "18:00",
-          "22:00"
+          "18:30",
+          "21:30"
         ]
       ]
     },
@@ -32,11 +27,11 @@
       "ranges": [
         [
           "12:00",
-          "14:00"
+          "15:00"
         ],
         [
-          "18:00",
-          "22:00"
+          "18:30",
+          "21:30"
         ]
       ]
     },
@@ -45,11 +40,11 @@
       "ranges": [
         [
           "12:00",
-          "14:00"
+          "15:00"
         ],
         [
-          "18:00",
-          "22:00"
+          "18:30",
+          "21:30"
         ]
       ]
     },
@@ -58,11 +53,11 @@
       "ranges": [
         [
           "12:00",
-          "14:00"
+          "15:00"
         ],
         [
-          "18:00",
-          "22:00"
+          "18:30",
+          "21:30"
         ]
       ]
     },
@@ -70,38 +65,22 @@
       "day": 5,
       "ranges": [
         [
-          "18:00",
-          "22:30"
-        ]
-      ]
-    },
-    {
-      "day": 6,
-      "ranges": [
-        [
-          "12:00",
-          "15:00"
+          "18:30",
+          "21:30"
         ]
       ]
     }
   ],
-  "closures": [
-    {
-      "date": "2026-12-24"
-    },
-    {
-      "date": "2026-12-25"
-    }
-  ],
+  "closures": [],
   "company": {
-    "name": "Brasserie Lindeboom BV",
-    "enterpriseNumber": "BE 0123.456.789"
+    "name": "FVDL Consulting",
+    "enterpriseNumber": "BE0678867960-TST"
   },
-  "widgetFormId": "mjrbnz296awyjw",
+  "widgetFormId": "md745iq6hcg5bb",
   "vouchers": {
     "enabled": true,
-    "url": "https://vouchers.tallores.com/lindeboom"
+    "url": "https://vouchers-dev.tallores.com/md745iq6hcg5bb"
   },
-  "maxOnlinePartySize": 10,
-  "siteUrl": "https://lindeboom.tallores.site"
+  "maxOnlinePartySize": 8,
+  "siteUrl": "https://frank-s-resto.tallores.site"
 }

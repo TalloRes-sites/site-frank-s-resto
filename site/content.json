@@ -1,30 +1,24 @@
 {
   "template": "klassiek",
-  "palette": "Bordeaux",
+  "palette": "Bistrogroen",
   "languages": [
     "nl"
   ],
   "fields": {
     "overline": {
-      "nl": "Brasserie · Mechelen"
+      "nl": "Retie"
     },
     "tagline": {
-      "nl": "Seizoenskeuken in het hart van Mechelen"
+      "nl": "Beste resaurant van Retie en Omstreken"
     },
     "aboutLabel": {
       "nl": "Over ons",
       "fr": "À propos",
       "en": "About us"
     },
-    "aboutTitle": {
-      "nl": "Een brasserie zoals het hoort"
-    },
-    "aboutText": {
-      "nl": "Sinds 2014 koken we met wat het seizoen en de boeren uit de streek ons brengen. Eerlijke Belgische klassiekers, een goed glas wijn en tijd om te tafelen."
-    },
-    "chef": {
-      "nl": "Chef Jonas Maes"
-    },
+    "aboutTitle": {},
+    "aboutText": {},
+    "chef": {},
     "menuLabel": {
       "nl": "Eten en drinken",
       "fr": "À table",
@@ -77,103 +71,19 @@
     }
   },
   "edited": [
-    "tagline",
-    "aboutTitle",
-    "aboutText",
-    "chef"
+    "tagline"
   ],
-  "gallery": [
-    {
-      "url": "assets/gallery-1.jpg",
-      "alt": {
-        "nl": "Gerecht"
-      }
-    },
-    {
-      "url": "assets/gallery-2.jpg",
-      "alt": {
-        "nl": "Terras"
-      }
-    },
-    {
-      "url": "assets/gallery-3.jpg",
-      "alt": {
-        "nl": "Bar"
-      }
-    },
-    {
-      "url": "assets/gallery-4.jpg",
-      "alt": {
-        "nl": "Wijn"
-      }
-    },
-    {
-      "url": "assets/gallery-5.jpg",
-      "alt": {
-        "nl": "Dessert"
-      }
-    },
-    {
-      "url": "assets/gallery-6.jpg",
-      "alt": {
-        "nl": "Zaal"
-      }
-    }
-  ],
+  "gallery": [],
   "galleryOn": true,
   "vouchersOn": true,
-  "menus": [
-    {
-      "id": "m1",
-      "url": "assets/menu-m1.pdf",
-      "uploadedAt": "2026-11-12",
-      "name": {
-        "nl": "À la carte"
-      },
-      "description": {}
-    },
-    {
-      "id": "m2",
-      "url": "assets/menu-m2.pdf",
-      "uploadedAt": "2026-11-03",
-      "name": {
-        "nl": "Lunchmenu"
-      },
-      "description": {
-        "nl": "Dinsdag tot vrijdag"
-      }
-    },
-    {
-      "id": "m3",
-      "url": "assets/menu-m3.pdf",
-      "uploadedAt": "2026-10-20",
-      "name": {
-        "nl": "Wijnkaart"
-      },
-      "description": {}
-    }
-  ],
-  "socials": {
-    "instagram": "@brasserielindeboom"
-  },
+  "menus": [],
+  "socials": {},
   "seo": {
     "title": {
-      "nl": "Brasserie Lindeboom · Brasserie in Mechelen"
+      "nl": "Frank's Resto · Retie"
     },
     "description": {
-      "nl": "Seizoenskeuken en Belgische klassiekers in Mechelen. Reserveer online een tafel."
-    }
-  },
-  "heroPhoto": {
-    "url": "assets/hero.jpg",
-    "alt": {
-      "nl": "Zaal met gedekte tafels"
-    }
-  },
-  "aboutPhoto": {
-    "url": "assets/about.jpg",
-    "alt": {
-      "nl": "Chef Jonas Maes in de keuken"
+      "nl": "het beste restaurant van Retie"
     }
   }
 }
