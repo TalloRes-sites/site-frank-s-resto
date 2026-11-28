@@ -1,6 +1,6 @@
 {
-  "template": "minimal",
-  "palette": "Wit",
+  "template": "klassiek",
+  "palette": "Bordeaux",
   "languages": [
     "nl"
   ],
@@ -25,14 +25,14 @@
       "en": "Food and drinks"
     },
     "menuTitle": {
-      "nl": "Menu",
-      "fr": "Menu",
+      "nl": "Menukaart",
+      "fr": "La carte",
       "en": "Menu"
     },
     "reserveTitle": {
-      "nl": "Reserveren",
-      "fr": "Réserver",
-      "en": "Book"
+      "nl": "Reserveer een tafel",
+      "fr": "Réservez une table",
+      "en": "Book a table"
     },
     "reserveIntro": {
       "nl": "Kies je dag en uur, je krijgt meteen een bevestiging.",
@@ -40,9 +40,9 @@
       "en": "Pick a day and time, you get a confirmation straight away."
     },
     "vouchersTitle": {
-      "nl": "Schenk een avond aan tafel.",
-      "fr": "Offrez une soirée à table.",
-      "en": "Give an evening at our table."
+      "nl": "Geef een avond bij ons cadeau",
+      "fr": "Offrez une soirée chez nous",
+      "en": "Give an evening with us"
     },
     "vouchersText": {
       "nl": "Cadeaubonnen, meteen in de mailbox.",
@@ -60,9 +60,9 @@
       "en": "Opening hours"
     },
     "locationTitle": {
-      "nl": "Adres",
-      "fr": "Adresse",
-      "en": "Address"
+      "nl": "Adres en contact",
+      "fr": "Adresse et contact",
+      "en": "Address and contact"
     },
     "contactTitle": {
       "nl": "Contact",
@@ -85,5 +85,6 @@
     "description": {
       "nl": "het beste restaurant van Retie"
     }
-  }
+  },
+  "logoUrl": "https://easyresdevwebsites.blob.core.windows.net/md745iq6hcg5bb/3eab7089167a7f6c.webp"
 }
