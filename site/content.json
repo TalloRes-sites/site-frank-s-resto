@@ -1,6 +1,6 @@
 {
-  "template": "klassiek",
-  "palette": "Bistrogroen",
+  "template": "minimal",
+  "palette": "Wit",
   "languages": [
     "nl"
   ],
@@ -25,14 +25,14 @@
       "en": "Food and drinks"
     },
     "menuTitle": {
-      "nl": "Menukaart",
-      "fr": "La carte",
+      "nl": "Menu",
+      "fr": "Menu",
       "en": "Menu"
     },
     "reserveTitle": {
-      "nl": "Reserveer een tafel",
-      "fr": "Réservez une table",
-      "en": "Book a table"
+      "nl": "Reserveren",
+      "fr": "Réserver",
+      "en": "Book"
     },
     "reserveIntro": {
       "nl": "Kies je dag en uur, je krijgt meteen een bevestiging.",
@@ -40,9 +40,9 @@
       "en": "Pick a day and time, you get a confirmation straight away."
     },
     "vouchersTitle": {
-      "nl": "Geef een avond bij ons cadeau",
-      "fr": "Offrez une soirée chez nous",
-      "en": "Give an evening with us"
+      "nl": "Schenk een avond aan tafel.",
+      "fr": "Offrez une soirée à table.",
+      "en": "Give an evening at our table."
     },
     "vouchersText": {
       "nl": "Cadeaubonnen, meteen in de mailbox.",
@@ -60,9 +60,9 @@
       "en": "Opening hours"
     },
     "locationTitle": {
-      "nl": "Adres en contact",
-      "fr": "Adresse et contact",
-      "en": "Address and contact"
+      "nl": "Adres",
+      "fr": "Adresse",
+      "en": "Address"
     },
     "contactTitle": {
       "nl": "Contact",
